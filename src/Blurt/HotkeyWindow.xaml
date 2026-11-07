@@ -1,0 +1,49 @@
+<Window x:Class="Blurt.HotkeyWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Set key" Width="460" SizeToContent="Height" ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner" ShowInTaskbar="False"
+        Background="{StaticResource Paper}" Foreground="{StaticResource Ink}"
+        FontFamily="{StaticResource UiFont}" FontSize="14"
+        PreviewKeyDown="Window_PreviewKeyDown">
+    <StackPanel Margin="32,24,32,28">
+        <TextBlock Text="Press the keys for" Style="{StaticResource Note}" FontSize="15" />
+        <TextBlock x:Name="TargetName" FontFamily="{StaticResource LightFont}" FontSize="28" Margin="0,0,0,18"
+                   TextTrimming="CharacterEllipsis" />
+
+        <Grid Height="100" Background="{StaticResource GraphPaper}">
+            <Rectangle Stroke="{StaticResource Ink}" StrokeThickness="1" SnapsToDevicePixels="True" />
+            <ItemsControl x:Name="Caps" HorizontalAlignment="Center" VerticalAlignment="Center" Focusable="False">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border MinWidth="52" Height="52" Margin="5,0" Background="{StaticResource Paper}"
+                                BorderBrush="{StaticResource Ink}" BorderThickness="1,1,1,3" Padding="14,0">
+                            <TextBlock Text="{Binding}" FontSize="18" FontWeight="SemiBold"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <TextBlock x:Name="Waiting" Text="Waiting for keys" FontSize="16" Foreground="{StaticResource Faint}"
+                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </Grid>
+
+        <TextBlock x:Name="Hint" Style="{StaticResource Note}" Margin="0,14,0,0"
+                   Text="Hold Ctrl, Alt or Shift and press a key. F1 to F24 and the number pad also work on their own. The key works in every app while Blurt runs." />
+
+        <Grid Margin="0,24,0,0">
+            <Button x:Name="RemoveButton" Style="{StaticResource Quiet}" HorizontalAlignment="Left" Content="Remove key"
+                    Click="Remove_Click" Focusable="False" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Style="{StaticResource Key}" Content="Cancel" Click="Cancel_Click" Focusable="False" />
+                <Button x:Name="SaveButton" Style="{StaticResource PrimaryKey}" Content="Save key" Margin="10,0,0,0" Padding="18,8"
+                        IsEnabled="False" Click="Save_Click" Focusable="False" />
+            </StackPanel>
+        </Grid>
+    </StackPanel>
+</Window>
